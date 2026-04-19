@@ -1151,6 +1151,7 @@ body {
         break-before: page !important;
         page-break-before: always !important;
         margin-top: 0 !important;
+        padding-top: 0 !important;
     }
 
     /* Prevención de cortes de sección (Layout Editorial) */
@@ -1171,8 +1172,8 @@ body {
         color: #000 !important;
         border-bottom: 1.5pt solid #000 !important;
         padding-bottom: 8px !important;
-        margin-top: 40px !important;
-        margin-bottom: 20px !important;
+        margin-top: 20px !important; /* Compacted to avoid jumps */
+        margin-bottom: 15px !important;
         break-after: avoid !important;
     }
 
@@ -1181,14 +1182,14 @@ body {
     .module {
         break-inside: auto !important;
         page-break-inside: auto !important;
-        margin-bottom: 30px !important;
-        padding-bottom: 1.5cm !important; /* Tightened safe zone */
+        margin-bottom: 25px !important;
+        padding-bottom: 0 !important; /* Removed huge gap */
     }
 
     .content-section {
         margin-bottom: 25px !important;
-        break-inside: auto !important;
-        page-break-inside: auto !important;
+        break-inside: avoid !important; /* GLUE headers and content */
+        page-break-inside: avoid !important;
     }
 
     /* Forzar visibilidad y contraste en vectores */
