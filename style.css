@@ -8,8 +8,8 @@
     --rosa-dark:    #8C595E;
     --gold:         #D4AF37; /* Luxury Gold */
     --gold-light:   #F9F6E5;
-    --rojo:         #B01E28; /* Deep Cherry */
-    --rojo-dark:    #7B161C;
+    --rojo:         #8C595E; /* Deep Cherry */
+    --rojo-dark:    #6D3E42;
     --negro:        #0A0A0A;
     --negro-soft:   #151515;
     --gris-800:     #1F1F1F;
@@ -141,7 +141,7 @@ body {
 
 .nav-item.active {
     color: var(--blanco);
-    background: linear-gradient(90deg, rgba(230, 57, 136, 0.2), transparent);
+    background: linear-gradient(90deg, rgba(176, 125, 136, 0.2), transparent);
     border-left: 3px solid var(--rosa);
 }
 
@@ -465,7 +465,7 @@ body {
 
 .pillar-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 30px rgba(230,57,136,0.15);
+    box-shadow: 0 12px 30px rgba(176,125,136,0.15);
     border-color: var(--rosa);
 }
 
@@ -1013,7 +1013,7 @@ body {
 }
 
 .pdf-print-mode .mod-title em {
-    color: #AD1457 !important; /* Deepest Ruby */
+    color: #8C595E !important; /* Deepest Ruby */
     font-style: italic !important;
     text-shadow: none !important;
 }
@@ -1045,15 +1045,15 @@ body {
 }
 
 .pdf-print-mode .pull-quote {
-    border-top: 3px solid #D81B60 !important;
-    border-bottom: 3px solid #D81B60 !important;
+    border-top: 3px solid #A95C68 !important;
+    border-bottom: 3px solid #A95C68 !important;
     color: #000000 !important;
     font-weight: 900 !important;
     background: #FFF9FB !important;
 }
 
 .pdf-print-mode .title-rule {
-    background: #FF007F !important;
+    background: #B07D88 !important;
     width: 80px !important;
     height: 5px !important;
 }
@@ -1075,7 +1075,7 @@ body {
         print-color-adjust: exact !important;
     }
 
-    .sidebar, .hamburger, .overlay, .sidebar-actions, .toast {
+    .sidebar, .hamburger, .overlay, .sidebar-actions, .toast, .mod-footer {
         display: none !important;
     }
 
@@ -1097,8 +1097,6 @@ body {
     }
 
     /* Prevención de cortes de sección (Layout Editorial) */
-    .content-section, 
-    .closing-section,
     .pillar-card,
     .student-card,
     .insight-box,
@@ -1111,6 +1109,12 @@ body {
         break-after: avoid !important;
         page-break-after: avoid !important;
         border-bottom: 2pt solid #000 !important;
+        margin-top: 25px !important;
+    }
+
+    .content-section, 
+    .closing-section {
+        margin-bottom: 30px !important;
     }
 
     /* Forzar visibilidad y contraste en vectores */
