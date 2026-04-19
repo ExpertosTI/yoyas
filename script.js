@@ -77,18 +77,50 @@ function generatePDF() {
     const titles = ['formacion-docente', 'psicologia-aula', 'clases-memorables'];
     const filename = `yoyas-makeup-school-${titles[modNum] || modNum}.pdf`;
 
-    html2pdf()
-        .set({
-            margin: [18, 18, 18, 18],
-            filename,
-            image: { type: 'jpeg', quality: 0.97 },
-            html2canvas: { scale: 2, useCORS: true, letterRendering: true },
-            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-            pagebreak: { mode: ['css', 'avoid-all'] }
-        })
-        .from(activeModule)
-        .save()
-        .then(() => showToast('PDF descargado correctamente'));
+    // Cargar logo para el PDF
+    const logoImg = new Image();
+    logoImg.src = 'logo.png';
+
+    const opt = {
+        margin: [20, 18, 22, 18],
+        filename,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak: { mode: ['css', 'avoid-all'] }
+    };
+
+    html2pdf().set(opt).from(activeModule).toPdf().get('pdf').then(function (pdf) {
+        const totalPages = pdf.internal.getNumberOfPages();
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+
+        for (let i = 1; i <= totalPages; i++) {
+            pdf.setPage(i);
+            
+            // Línea decorativa sutil en el pie
+            pdf.setDrawColor(230);
+            pdf.setLineWidth(0.2);
+            pdf.line(18, pageHeight - 15, pageWidth - 18, pageHeight - 15);
+
+            // Logo de la academia
+            try {
+                // Posición: Inferior Izquierda
+                // Tamaño aproximado: 25mm de ancho
+                pdf.addImage(logoImg, 'PNG', 18, pageHeight - 13, 25, 8);
+            } catch (e) {
+                // Fallback de texto si el logo no carga
+                pdf.setFontSize(8);
+                pdf.setTextColor(100);
+                pdf.text("yoyas MAKEUP SCHOOL", 18, pageHeight - 10);
+            }
+
+            // Numeración
+            pdf.setFontSize(8);
+            pdf.setTextColor(150);
+            pdf.text(`Página ${i} de ${totalPages}`, pageWidth - 35, pageHeight - 10);
+        }
+    }).save().then(() => showToast('PDF descargado correctamente'));
 }
 
 // Keyboard navigation
