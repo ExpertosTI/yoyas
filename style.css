@@ -993,52 +993,143 @@ body {
    ═══════════════════════════════════════ */
 
 .pdf-print-mode {
-    --rosa: #C2185B !important; /* Deep Intense Magenta */
-    --gold: #B8860B !important; /* Dark Goldenrod for better definition */
-    --negro: #000000 !important; /* Pure Black text */
-    --gris-600: #111111 !important; /* Darker Subtitles */
-    --blanco: #FFFFFF !important;
+    --rosa: #D81B60 !important; /* Deep Royal Magenta (High visibility) */
+    --gold: #744210 !important; /* Solid Bronze/Gold */
+    --negro: #000000 !important; /* Absolute Ink Black */
+    --gris-600: #000000 !important;
+    --gris-100: #FFFFFF !important;
+    font-weight: 600 !important; /* Force solid weight for ink coverage */
+}
+
+.pdf-print-mode body {
+    background: #FFFFFF !important;
 }
 
 .pdf-print-mode .mod-title {
     color: #000000 !important;
-    font-weight: 700 !important;
+    font-weight: 900 !important;
+    font-size: 3.5em !important;
+    letter-spacing: -2.5px !important;
 }
 
 .pdf-print-mode .mod-title em {
-    color: #880E4F !important; /* Deepest Cherry */
+    color: #AD1457 !important; /* Deepest Ruby */
+    font-style: italic !important;
     text-shadow: none !important;
 }
 
 .pdf-print-mode .section-heading {
-    border-bottom: 2px solid #C2185B !important;
+    border-bottom: 3px solid #000000 !important;
     color: #000000 !important;
+    font-weight: 900 !important;
 }
 
-.pdf-print-mode p, 
-.pdf-print-mode li {
+.pdf-print-mode .content-section > p, 
+.pdf-print-mode .styled-list li {
     color: #000000 !important;
-    font-weight: 500 !important; /* Slightly bolder for print */
+    font-weight: 500 !important;
+    line-height: 1.8 !important;
+    font-size: 1.05em !important;
 }
 
 .pdf-print-mode .pillar-card,
 .pdf-print-mode .student-card {
-    border: 1.5px solid #C2185B !important;
+    border: 3px solid #000000 !important;
+    background: #FFFFFF !important;
     box-shadow: none !important;
 }
 
-.pdf-print-mode .ts-marker {
+.pdf-print-mode .pillar-icon {
     background: #000000 !important;
-    box-shadow: none !important;
+    color: #FFFFFF !important;
 }
 
 .pdf-print-mode .pull-quote {
-    border-top: 1px solid #C2185B !important;
-    border-bottom: 1px solid #C2185B !important;
-    color: #880E4F !important;
+    border-top: 3px solid #D81B60 !important;
+    border-bottom: 3px solid #D81B60 !important;
+    color: #000000 !important;
+    font-weight: 900 !important;
+    background: #FFF9FB !important;
 }
 
-.pdf-print-mode .insight-box {
-    background: #FDF5F7 !important;
-    border-left: 5px solid #C2185B !important;
+.pdf-print-mode .title-rule {
+    background: #FF007F !important;
+    width: 80px !important;
+    height: 5px !important;
+}
+
+/* ═══════════════════════════════════════
+   NATIVE PRINT STYLES (True Vector Export)
+   ═══════════════════════════════════════ */
+
+@media print {
+    @page {
+        margin: 1.5cm;
+        size: A4;
+    }
+
+    body {
+        background: white !important;
+        font-family: 'Montserrat', sans-serif !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .sidebar, .hamburger, .overlay, .sidebar-actions, .toast {
+        display: none !important;
+    }
+
+    .main {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        max-width: none !important;
+        background: white !important;
+    }
+
+    .module {
+        display: none !important;
+    }
+
+    .module.active {
+        display: block !important;
+        background: white !important;
+    }
+
+    /* Forzar visibilidad y contraste en vectores */
+    .mod-title {
+        color: #000 !important;
+        font-weight: 800 !important;
+        font-size: 2.8pt !important; /* Ajuste para impresión */
+    }
+
+    p, li {
+        color: #000 !important;
+        font-size: 11pt !important;
+        line-height: 1.6 !important;
+    }
+
+    .pillar-card, .student-card {
+        border: 1pt solid #000 !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    .pull-quote {
+        border-top: 1pt solid var(--rosa) !important;
+        border-bottom: 1pt solid var(--rosa) !important;
+        padding: 2cm 0 !important;
+    }
+
+    footer {
+        display: block !important;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        font-size: 9pt;
+        color: #666;
+        border-top: 0.5pt solid #ccc;
+        padding-top: 5mm;
+    }
 }

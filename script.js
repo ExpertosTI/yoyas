@@ -77,54 +77,61 @@ function generatePDF() {
     const titles = ['formacion-docente', 'psicologia-aula', 'clases-memorables'];
     const filename = `yoyas-makeup-school-${titles[modNum] || modNum}.pdf`;
 
-    // Cargar logo para el PDF
     const logoImg = new Image();
     logoImg.src = 'logo.png';
 
     const opt = {
-        margin: [20, 18, 22, 18],
+        margin: [16, 15, 18, 15],
         filename,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, letterRendering: true },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        image: { type: 'jpeg', quality: 0.96 }, // JPEG Alta Calidad para menor peso
+        html2canvas: { 
+            scale: 2.5, // Balance perfecto entre nitidez y peso
+            useCORS: true, 
+            letterRendering: true,
+            windowWidth: 1200
+        },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait', compress: true },
         pagebreak: { mode: ['css', 'avoid-all'] }
     };
 
-    // Activar modo de alta visibilidad para impresión
     document.body.classList.add('pdf-print-mode');
 
-    html2pdf().set(opt).from(activeModule).toPdf().get('pdf').then(function (pdf) {
-        const totalPages = pdf.internal.getNumberOfPages();
-        const pageWidth = pdf.internal.pageSize.getWidth();
-        const pageHeight = pdf.internal.pageSize.getHeight();
+    setTimeout(() => {
+        html2pdf().set(opt).from(activeModule).toPdf().get('pdf').then(function (pdf) {
+            const totalPages = pdf.internal.getNumberOfPages();
+            const pageWidth = pdf.internal.pageSize.getWidth();
+            const pageHeight = pdf.internal.pageSize.getHeight();
 
-        for (let i = 1; i <= totalPages; i++) {
-            pdf.setPage(i);
-            
-            // Línea decorativa vibrante en el pie (Oro Profundo para impresión)
-            pdf.setDrawColor(132, 99, 0); 
-            pdf.setLineWidth(0.6);
-            pdf.line(18, pageHeight - 15, pageWidth - 18, pageHeight - 15);
+            for (let i = 1; i <= totalPages; i++) {
+                pdf.setPage(i);
+                pdf.setDrawColor(133, 100, 4); 
+                pdf.setLineWidth(1.0); 
+                pdf.line(15, pageHeight - 15, pageWidth - 15, pageHeight - 15);
 
-            // Logo de la academia
-            try {
-                pdf.addImage(logoImg, 'PNG', 18, pageHeight - 13, 25, 8);
-            } catch (e) {
-                pdf.setFontSize(8);
-                pdf.setTextColor(194, 24, 91); // Rosa Intenso
-                pdf.text("yoyas MAKEUP SCHOOL", 18, pageHeight - 10);
+                try {
+                    pdf.addImage(logoImg, 'PNG', 15, pageHeight - 13, 26, 8.5);
+                } catch (e) {
+                    pdf.setFontSize(10);
+                    pdf.setTextColor(216, 27, 96); 
+                    pdf.text("yoyas MAKEUP SCHOOL", 15, pageHeight - 10);
+                }
+
+                pdf.setFontSize(10);
+                pdf.setTextColor(0, 0, 0);
+                pdf.text(`Página ${i} de ${totalPages}`, pageWidth - 36, pageHeight - 10);
             }
+        }).save().then(() => {
+            document.body.classList.remove('pdf-print-mode');
+            showToast('PDF optimizado descargado');
+        });
+    }, 150);
+}
 
-            // Numeración fija en negro puro
-            pdf.setFontSize(9);
-            pdf.setTextColor(0, 0, 0);
-            pdf.text(`Página ${i} de ${totalPages}`, pageWidth - 35, pageHeight - 10);
-        }
-    }).save().then(() => {
-        // Restaurar modo normal
-        document.body.classList.remove('pdf-print-mode');
-        showToast('PDF descargado correctamente');
-    });
+function imprimirPro() {
+    showToast('Abriendo versión de imprenta pro…');
+    setTimeout(() => {
+        window.print();
+    }, 300);
 }
 
 // Keyboard navigation
