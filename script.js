@@ -72,10 +72,8 @@ function descargarPDF() {
 }
 
 function generatePDF() {
-    const activeModule = document.querySelector('.module.active');
-    const modNum = activeModule.id.replace('mod-', '');
-    const titles = ['formacion-docente', 'psicologia-aula', 'clases-memorables'];
-    const filename = `yoyas-makeup-school-${titles[modNum] || modNum}.pdf`;
+    const content = document.getElementById('main');
+    const filename = `yoyas-makeup-school-formacion-completa.pdf`;
 
     const logoImg = new Image();
     logoImg.src = 'logo.png';
@@ -85,11 +83,11 @@ function generatePDF() {
         filename,
         image: { type: 'png', quality: 1 }, 
         html2canvas: { 
-            scale: 2.0, // Scale 2 para compatibilidad y nitidez en Lite
+            scale: 2.0, 
             useCORS: true, 
             letterRendering: true,
             windowWidth: 1200,
-            scrollY: 0, // Capturar desde el inicio del documento
+            scrollY: 0,
             scrollX: 0
         },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait', compress: true },
@@ -98,9 +96,9 @@ function generatePDF() {
 
     document.body.classList.add('pdf-print-mode');
 
-    // Aumentar delay a 400ms para asegurar renderizado completo en dispositivos lentos
+    // Delay robusto para manual completo
     setTimeout(() => {
-        html2pdf().set(opt).from(activeModule).toPdf().get('pdf').then(function (pdf) {
+        html2pdf().set(opt).from(content).toPdf().get('pdf').then(function (pdf) {
             const totalPages = pdf.internal.getNumberOfPages();
             const pageWidth = pdf.internal.pageSize.getWidth();
             const pageHeight = pdf.internal.pageSize.getHeight();
@@ -111,17 +109,22 @@ function generatePDF() {
                 pdf.setLineWidth(1.0); 
                 pdf.line(15, pageHeight - 15, pageWidth - 15, pageHeight - 15);
 
+                const logoScale = 0.33; 
                 try {
                     pdf.addImage(logoImg, 'PNG', 15, pageHeight - 13, 26, 8.5);
                 } catch (e) {
                     // Fallback silencioso
                 }
+
+                pdf.setFontSize(8);
+                pdf.setTextColor(100, 100, 100);
+                pdf.text(`Página ${i} de ${totalPages}`, pageWidth - 36, pageHeight - 10);
             }
         }).save().then(() => {
             document.body.classList.remove('pdf-print-mode');
-            showToast('PDF optimizado descargado');
+            showToast('Manual Completo descargado');
         });
-    }, 400); 
+    }, 500); 
 }
 
 function imprimirPro() {

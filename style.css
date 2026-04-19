@@ -1080,20 +1080,55 @@ body {
     }
 
     .main {
+        display: block !important;
         margin: 0 !important;
         padding: 0 !important;
         width: 100% !important;
         max-width: none !important;
         background: white !important;
+        min-height: auto !important;
+        height: auto !important;
+        overflow: visible !important;
+        position: static !important;
     }
 
-    .module {
-        display: none !important;
-    }
-
-    .module.active {
+    /* Regla Universal de Visibilidad Total para Impresión */
+    .module,
+    .content-section {
         display: block !important;
-        background: white !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+        height: auto !important;
+        min-height: auto !important;
+        overflow: visible !important;
+        position: static !important;
+    }
+
+    /* Asegurar que los hijos no hereden opacidad 0 o transformaciones web */
+    .module *, .content-section * {
+        opacity: 1 !important;
+        visibility: visible !important;
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+    }
+
+    /* Restaurar visuales específicos que deben ser flex/grid */
+    .three-pillars, .student-grid, .emotion-grid, .contrast-cards, .body-lang-grid {
+        display: grid !important;
+    }
+    .mod-header, .timeline-step, .insight-box, .method-node, .mod-tag, .edc-header {
+        display: flex !important;
+    }
+
+    /* Salto de página entre módulos (Solo a partir del segundo) */
+    .module + .module {
+        break-before: page !important;
+        page-break-before: always !important;
+        margin-top: 0 !important;
     }
 
     /* Prevención de cortes de sección (Layout Editorial) */
@@ -1114,7 +1149,7 @@ body {
 
     .content-section, 
     .closing-section {
-        margin-bottom: 30px !important;
+        margin-bottom: 40px !important;
     }
 
     /* Forzar visibilidad y contraste en vectores */
