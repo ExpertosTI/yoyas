@@ -13,7 +13,7 @@ services:
       resources:
         limits:
           cpus: '0.10'
-          memory: 64M
+          memory: 128M
       labels:
         - "traefik.enable=true"
         # ── HTTPS ──────────────────────────────────────────────
