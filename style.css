@@ -3,9 +3,9 @@
    ═══════════════════════════════════════ */
 
 :root {
-    --rosa:         #E63988; /* Vibrant Rose Gold */
+    --rosa:         #B07D88; /* Vibrant Rose Gold */
     --rosa-light:   #FCE4EC;
-    --rosa-dark:    #C2185B;
+    --rosa-dark:    #8C595E;
     --gold:         #D4AF37; /* Luxury Gold */
     --gold-light:   #F9F6E5;
     --rojo:         #B01E28; /* Deep Cherry */
@@ -993,7 +993,7 @@ body {
    ═══════════════════════════════════════ */
 
 .pdf-print-mode {
-    --rosa: #D81B60 !important; /* Deep Royal Magenta (High visibility) */
+    --rosa: #A95C68 !important; /* Deep Royal Magenta (High visibility) */
     --gold: #744210 !important; /* Solid Bronze/Gold */
     --negro: #000000 !important; /* Absolute Ink Black */
     --gris-600: #000000 !important;
@@ -1096,17 +1096,41 @@ body {
         background: white !important;
     }
 
+    /* Prevención de cortes de sección (Layout Editorial) */
+    .content-section, 
+    .closing-section,
+    .pillar-card,
+    .student-card,
+    .insight-box,
+    .pull-quote {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
+
+    .section-heading {
+        break-after: avoid !important;
+        page-break-after: avoid !important;
+        border-bottom: 2pt solid #000 !important;
+    }
+
     /* Forzar visibilidad y contraste en vectores */
     .mod-title {
         color: #000 !important;
         font-weight: 800 !important;
-        font-size: 2.8pt !important; /* Ajuste para impresión */
+        font-size: 2.8pt !important;
+    }
+
+    .mod-title em {
+        color: var(--rosa) !important;
+        font-style: italic !important;
     }
 
     p, li {
         color: #000 !important;
         font-size: 11pt !important;
         line-height: 1.6 !important;
+        orphans: 3;
+        widows: 3;
     }
 
     .pillar-card, .student-card {

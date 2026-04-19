@@ -83,12 +83,14 @@ function generatePDF() {
     const opt = {
         margin: [16, 15, 18, 15],
         filename,
-        image: { type: 'jpeg', quality: 0.96 }, // JPEG Alta Calidad para menor peso
+        image: { type: 'png', quality: 1 }, 
         html2canvas: { 
-            scale: 2.5, // Balance perfecto entre nitidez y peso
+            scale: 2.0, // Scale 2 para compatibilidad y nitidez en Lite
             useCORS: true, 
             letterRendering: true,
-            windowWidth: 1200
+            windowWidth: 1200,
+            scrollY: 0, // Capturar desde el inicio del documento
+            scrollX: 0
         },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait', compress: true },
         pagebreak: { mode: ['css', 'avoid-all'] }
@@ -96,6 +98,7 @@ function generatePDF() {
 
     document.body.classList.add('pdf-print-mode');
 
+    // Aumentar delay a 400ms para asegurar renderizado completo en dispositivos lentos
     setTimeout(() => {
         html2pdf().set(opt).from(activeModule).toPdf().get('pdf').then(function (pdf) {
             const totalPages = pdf.internal.getNumberOfPages();
@@ -111,14 +114,14 @@ function generatePDF() {
                 try {
                     pdf.addImage(logoImg, 'PNG', 15, pageHeight - 13, 26, 8.5);
                 } catch (e) {
-                    // Si falla el logo, no ponemos texto inventado
+                    // Fallback silencioso
                 }
             }
         }).save().then(() => {
             document.body.classList.remove('pdf-print-mode');
             showToast('PDF optimizado descargado');
         });
-    }, 150);
+    }, 400); 
 }
 
 function imprimirPro() {
