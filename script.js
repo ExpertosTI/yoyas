@@ -98,26 +98,23 @@ function generatePDF() {
         for (let i = 1; i <= totalPages; i++) {
             pdf.setPage(i);
             
-            // Línea decorativa sutil en el pie
-            pdf.setDrawColor(230);
-            pdf.setLineWidth(0.2);
+            // Línea decorativa vibrante en el pie
+            pdf.setDrawColor(212, 175, 55); // Gold
+            pdf.setLineWidth(0.4);
             pdf.line(18, pageHeight - 15, pageWidth - 18, pageHeight - 15);
 
             // Logo de la academia
             try {
-                // Posición: Inferior Izquierda
-                // Tamaño aproximado: 25mm de ancho
                 pdf.addImage(logoImg, 'PNG', 18, pageHeight - 13, 25, 8);
             } catch (e) {
-                // Fallback de texto si el logo no carga
                 pdf.setFontSize(8);
-                pdf.setTextColor(100);
+                pdf.setTextColor(230, 57, 136); // Rose Gold
                 pdf.text("yoyas MAKEUP SCHOOL", 18, pageHeight - 10);
             }
 
-            // Numeración
+            // Numeración con mejor contraste
             pdf.setFontSize(8);
-            pdf.setTextColor(150);
+            pdf.setTextColor(100);
             pdf.text(`Página ${i} de ${totalPages}`, pageWidth - 35, pageHeight - 10);
         }
     }).save().then(() => showToast('PDF descargado correctamente'));

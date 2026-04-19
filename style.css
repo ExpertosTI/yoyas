@@ -3,21 +3,23 @@
    ═══════════════════════════════════════ */
 
 :root {
-    --rosa:       #B8849A;
-    --rosa-light: #E8D5DC;
-    --rosa-dark:  #8E6070;
-    --rojo:       #C0392B;
-    --rojo-dark:  #922B21;
-    --negro:      #131313;
-    --negro-soft: #1E1E1E;
-    --gris-800:   #2C2C2C;
-    --gris-600:   #4A4A4A;
-    --gris-400:   #8A8A8A;
-    --gris-100:   #F4F0F2;
-    --gris-50:    #FAF8F9;
-    --blanco:     #FFFFFF;
-    --sidebar-w:  270px;
-    --ease:       cubic-bezier(0.22, 1, 0.36, 1);
+    --rosa:         #E63988; /* Vibrant Rose Gold */
+    --rosa-light:   #FCE4EC;
+    --rosa-dark:    #C2185B;
+    --gold:         #D4AF37; /* Luxury Gold */
+    --gold-light:   #F9F6E5;
+    --rojo:         #B01E28; /* Deep Cherry */
+    --rojo-dark:    #7B161C;
+    --negro:        #0A0A0A;
+    --negro-soft:   #151515;
+    --gris-800:     #1F1F1F;
+    --gris-600:     #3D3D3D;
+    --gris-400:     #555555;
+    --gris-100:     #FDFBF7; /* Warm Champagne Background */
+    --gris-50:      #FFFEFC;
+    --blanco:       #FFFFFF;
+    --sidebar-w:    280px;
+    --ease:         cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -53,8 +55,8 @@ body {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--rosa), var(--rojo));
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--rosa), var(--rojo));
 }
 
 /* ─ Brand ─ */
@@ -89,10 +91,10 @@ body {
 }
 
 .brand-sub {
-    font-size: 0.6em;
-    letter-spacing: 5px;
-    color: var(--rosa);
-    font-weight: 600;
+    font-size: 0.62em;
+    letter-spacing: 6px;
+    color: var(--gold);
+    font-weight: 700;
     text-transform: uppercase;
 }
 
@@ -139,7 +141,8 @@ body {
 
 .nav-item.active {
     color: var(--blanco);
-    background: rgba(184,132,154,0.15);
+    background: linear-gradient(90deg, rgba(230, 57, 136, 0.2), transparent);
+    border-left: 3px solid var(--rosa);
 }
 
 .nav-dot {
@@ -352,8 +355,8 @@ body {
 }
 
 .title-rule {
-    width: 48px; height: 3px;
-    background: linear-gradient(90deg, var(--rosa), var(--rojo));
+    width: 60px; height: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--rosa));
     border-radius: 2px;
     margin-top: 22px;
 }
@@ -384,8 +387,8 @@ body {
 
 .heading-accent {
     display: inline-block;
-    width: 4px; height: 20px;
-    background: linear-gradient(180deg, var(--rosa), var(--rojo));
+    width: 5px; height: 22px;
+    background: linear-gradient(180deg, var(--gold), var(--rosa));
     border-radius: 2px;
     flex-shrink: 0;
 }
@@ -461,8 +464,9 @@ body {
 }
 
 .pillar-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(184,132,154,0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(230,57,136,0.15);
+    border-color: var(--rosa);
 }
 
 .pillar-icon {
