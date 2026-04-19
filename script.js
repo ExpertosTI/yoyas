@@ -104,21 +104,15 @@ function generatePDF() {
 
             for (let i = 1; i <= totalPages; i++) {
                 pdf.setPage(i);
-                pdf.setDrawColor(133, 100, 4); 
+                pdf.setDrawColor(116, 66, 16); 
                 pdf.setLineWidth(1.0); 
                 pdf.line(15, pageHeight - 15, pageWidth - 15, pageHeight - 15);
 
                 try {
                     pdf.addImage(logoImg, 'PNG', 15, pageHeight - 13, 26, 8.5);
                 } catch (e) {
-                    pdf.setFontSize(10);
-                    pdf.setTextColor(216, 27, 96); 
-                    pdf.text("yoyas MAKEUP SCHOOL", 15, pageHeight - 10);
+                    // Si falla el logo, no ponemos texto inventado
                 }
-
-                pdf.setFontSize(10);
-                pdf.setTextColor(0, 0, 0);
-                pdf.text(`Página ${i} de ${totalPages}`, pageWidth - 36, pageHeight - 10);
             }
         }).save().then(() => {
             document.body.classList.remove('pdf-print-mode');
