@@ -90,6 +90,9 @@ function generatePDF() {
         pagebreak: { mode: ['css', 'avoid-all'] }
     };
 
+    // Activar modo de alta visibilidad para impresión
+    document.body.classList.add('pdf-print-mode');
+
     html2pdf().set(opt).from(activeModule).toPdf().get('pdf').then(function (pdf) {
         const totalPages = pdf.internal.getNumberOfPages();
         const pageWidth = pdf.internal.pageSize.getWidth();
@@ -98,9 +101,9 @@ function generatePDF() {
         for (let i = 1; i <= totalPages; i++) {
             pdf.setPage(i);
             
-            // Línea decorativa vibrante en el pie
-            pdf.setDrawColor(212, 175, 55); // Gold
-            pdf.setLineWidth(0.4);
+            // Línea decorativa vibrante en el pie (Oro Profundo para impresión)
+            pdf.setDrawColor(132, 99, 0); 
+            pdf.setLineWidth(0.6);
             pdf.line(18, pageHeight - 15, pageWidth - 18, pageHeight - 15);
 
             // Logo de la academia
@@ -108,16 +111,20 @@ function generatePDF() {
                 pdf.addImage(logoImg, 'PNG', 18, pageHeight - 13, 25, 8);
             } catch (e) {
                 pdf.setFontSize(8);
-                pdf.setTextColor(230, 57, 136); // Rose Gold
+                pdf.setTextColor(194, 24, 91); // Rosa Intenso
                 pdf.text("yoyas MAKEUP SCHOOL", 18, pageHeight - 10);
             }
 
-            // Numeración con mejor contraste
-            pdf.setFontSize(8);
-            pdf.setTextColor(100);
+            // Numeración fija en negro puro
+            pdf.setFontSize(9);
+            pdf.setTextColor(0, 0, 0);
             pdf.text(`Página ${i} de ${totalPages}`, pageWidth - 35, pageHeight - 10);
         }
-    }).save().then(() => showToast('PDF descargado correctamente'));
+    }).save().then(() => {
+        // Restaurar modo normal
+        document.body.classList.remove('pdf-print-mode');
+        showToast('PDF descargado correctamente');
+    });
 }
 
 // Keyboard navigation

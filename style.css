@@ -987,3 +987,58 @@ body {
     width: auto;
     filter: brightness(0) invert(1); /* White logo for dark sidebar */
 }
+
+/* ═══════════════════════════════════════
+   PDF PRINT MODE — High Saturation & Contrast
+   ═══════════════════════════════════════ */
+
+.pdf-print-mode {
+    --rosa: #C2185B !important; /* Deep Intense Magenta */
+    --gold: #B8860B !important; /* Dark Goldenrod for better definition */
+    --negro: #000000 !important; /* Pure Black text */
+    --gris-600: #111111 !important; /* Darker Subtitles */
+    --blanco: #FFFFFF !important;
+}
+
+.pdf-print-mode .mod-title {
+    color: #000000 !important;
+    font-weight: 700 !important;
+}
+
+.pdf-print-mode .mod-title em {
+    color: #880E4F !important; /* Deepest Cherry */
+    text-shadow: none !important;
+}
+
+.pdf-print-mode .section-heading {
+    border-bottom: 2px solid #C2185B !important;
+    color: #000000 !important;
+}
+
+.pdf-print-mode p, 
+.pdf-print-mode li {
+    color: #000000 !important;
+    font-weight: 500 !important; /* Slightly bolder for print */
+}
+
+.pdf-print-mode .pillar-card,
+.pdf-print-mode .student-card {
+    border: 1.5px solid #C2185B !important;
+    box-shadow: none !important;
+}
+
+.pdf-print-mode .ts-marker {
+    background: #000000 !important;
+    box-shadow: none !important;
+}
+
+.pdf-print-mode .pull-quote {
+    border-top: 1px solid #C2185B !important;
+    border-bottom: 1px solid #C2185B !important;
+    color: #880E4F !important;
+}
+
+.pdf-print-mode .insight-box {
+    background: #FDF5F7 !important;
+    border-left: 5px solid #C2185B !important;
+}
